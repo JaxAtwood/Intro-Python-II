@@ -1,6 +1,11 @@
+import time
+import sys
+import os
 from room import Room
+from player import Player
+from item import Item
 
-# Declare all the rooms
+# # Declare all the rooms
 
 room = {
     'outside':  Room("Outside Cave Entrance",
@@ -49,3 +54,52 @@ room['treasure'].s_to = room['narrow']
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
+
+name = input('\tWhat is your name, charmed one? \t')
+player = Player(name, room['outside'])
+
+while True:
+    userinput = input("Where do you wanna go or do you wanna bounce?\n n, s, e, w, q").lower()
+
+    if userinput == 'n':
+        next = player.current_room.n_to
+        if next == None:
+            print("Cannot go this direction")
+        else:
+            player = Player(name, next)
+            print(player)
+            print("north")
+    
+    elif userinput == 's':
+        next = player.current_room.s_to
+        if next == None:
+            print("Cannot go this direction")
+        else:
+            player = Player(name, next)
+            print(player)
+            print("south")
+            
+    elif userinput == "e":
+        next = player.current_room.e_to
+        if next == None:
+            print("Cannot go this direction")
+        else:
+            player = Player(name, next)
+            print(player)
+            print("east")
+
+    elif userinput == "w":
+        next = player.current_room.w_to
+        if next == None:
+            print("Cannot go this direction")
+        else:
+            player = Player(name, next)
+            print(player)
+            print("west")
+
+    elif userinput == "q":
+        print("Bye Felicia")
+        break
+
+    elif userinput != "n" or "s" or "e" or "w" or "q":
+        print("You have to pick something, dude")
